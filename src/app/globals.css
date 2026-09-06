@@ -1,26 +1,126 @@
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap");
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* next-themes sets class="dark" on <html>, so drive the variant off that
+   instead of Tailwind v4's default prefers-color-scheme media query. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Menlo", monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Stop the layout shifting sideways when a page grows a scrollbar. */
+    scrollbar-gutter: stable;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-zinc-100 text-zinc-800 antialiased dark:bg-zinc-900 dark:text-zinc-300;
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    @apply bg-zinc-800 text-zinc-100 dark:bg-zinc-200 dark:text-zinc-900;
+  }
+
+  /* Slim scrollbars, matching the zinc palette. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-zinc-400) transparent;
+  }
+  .dark * {
+    scrollbar-color: var(--color-zinc-700) transparent;
+  }
+
+  /* Anchor links added to headings by rehype-autolink-headings. */
+  .heading-anchor {
+    @apply ml-2 opacity-0 no-underline transition-opacity;
+  }
+  h2:hover > .heading-anchor,
+  h3:hover > .heading-anchor,
+  h4:hover > .heading-anchor {
+    @apply opacity-60;
+  }
+
+  /* Offset anchored headings so they don't hide under the top of the viewport. */
+  :target {
+    scroll-margin-top: 6rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Code blocks.
+ *
+ * Deliberately UNLAYERED. @tailwindcss/typography registers `prose` in the
+ * utilities layer, which beats anything in @layer components no matter how
+ * specific it is - that made light mode keep prose's dark `pre` background.
+ * Unlayered rules win over every layer, so these stick.
+ *
+ * rehype-pretty-code is configured with two shiki themes. It writes the colours
+ * as --shiki-light / --shiki-dark custom properties on each token and leaves it
+ * to CSS to pick one, so BOTH rules below are required; with only the dark one,
+ * light mode falls back to prose's flat pre-code colour.
+ *
+ * The `pre` rules set an explicit text colour on purpose. A fence with no
+ * language gets no --shiki-light/--shiki-dark on its spans, so `color:
+ * var(--shiki-light)` is invalid at computed-value time and the span simply
+ * inherits. Without a colour here that inherited value is prose's
+ * --tw-prose-pre-code - a light grey meant for prose's dark `pre` background -
+ * which left plain fences at about 1.2:1 contrast in light mode.
+ */
+[data-rehype-pretty-code-figure] pre {
+  @apply overflow-x-auto rounded-lg border py-4 text-sm leading-relaxed;
+}
+html:not(.dark) [data-rehype-pretty-code-figure] pre {
+  @apply border-zinc-200 bg-zinc-100 text-zinc-800;
+}
+.dark [data-rehype-pretty-code-figure] pre {
+  @apply border-zinc-800 bg-zinc-950 text-zinc-200;
+}
+
+[data-rehype-pretty-code-figure] pre > code {
+  @apply grid bg-transparent p-0; /* one row per line, so highlights span the full width */
+}
+[data-rehype-pretty-code-figure] pre > code > [data-line] {
+  @apply px-4;
+}
+[data-rehype-pretty-code-figure] pre > code > [data-highlighted-line] {
+  @apply border-l-2 border-zinc-400 bg-zinc-500/10;
+}
+
+html:not(.dark) [data-rehype-pretty-code-figure] pre span {
+  color: var(--shiki-light);
+}
+.dark [data-rehype-pretty-code-figure] pre span {
+  color: var(--shiki-dark);
+}
+
+[data-rehype-pretty-code-title] {
+  @apply rounded-t-lg border border-b-0 px-4 py-2 font-mono text-xs;
+}
+html:not(.dark) [data-rehype-pretty-code-title] {
+  @apply border-zinc-200 bg-zinc-100 text-zinc-600;
+}
+.dark [data-rehype-pretty-code-title] {
+  @apply border-zinc-800 bg-zinc-950 text-zinc-400;
+}
+[data-rehype-pretty-code-title] + pre {
+  @apply mt-0 rounded-t-none;
+}
+
+/* Inline `code`. The plugin wraps it in a span figure, which would otherwise
+   inherit the block styles above and break onto its own line. */
+span[data-rehype-pretty-code-figure] {
+  @apply inline;
+}
+span[data-rehype-pretty-code-figure] > code {
+  @apply inline rounded bg-zinc-200 px-1.5 py-0.5 font-mono text-[0.85em] dark:bg-zinc-800;
+}
+/* Inline code takes the surrounding text colour rather than a shiki theme. */
+span[data-rehype-pretty-code-figure] > code,
+span[data-rehype-pretty-code-figure] > code span {
+  color: inherit;
 }

@@ -1,0 +1,41 @@
+---
+title: "Hello, world"
+description: "Why I finally built a place of my own on the internet, and what I plan to put here."
+date: 2026-08-29
+tags: ["meta"]
+published: true
+---
+
+Every developer eventually builds a personal site, usually twice. This is mine.
+
+The short version of why: I kept writing explanations in Discord threads and DMs
+that I could never find again. A blog is just a place where those don't get lost.
+
+## What goes here
+
+- Notes on things I built and what broke along the way
+- Explanations of concepts I had to learn the hard way
+- The occasional opinion, clearly labelled as one
+
+## How this site works
+
+There's no CMS and no database. Each post is a Markdown file in `content/posts/`,
+and the site reads that directory at build time. Adding a post looks like this:
+
+```bash title="Publishing a post"
+# write it
+vim content/posts/my-new-post.mdx
+
+# ship it
+git add . && git commit -m "post: my new post" && git push
+```
+
+That's the whole publishing pipeline. The deploy runs automatically and the post
+is live in about a minute.
+
+<Callout>
+Set `published: false` in a post's frontmatter to keep it as a draft. It stays
+visible when you run `npm run dev`, but never ships to production.
+</Callout>
+
+More soon.

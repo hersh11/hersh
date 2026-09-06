@@ -1,0 +1,73 @@
+---
+title: "Everything this blog can render"
+description: "A reference post showing the formatting available in any .mdx file here. Keep it as a draft and copy from it."
+date: 2026-08-28
+tags: ["meta", "reference"]
+published: false
+---
+
+This post is a draft on purpose. It never ships to production, but it stays
+visible in `npm run dev` so you can copy syntax out of it.
+
+## Text
+
+Regular paragraphs, **bold**, *italic*, `inline code`, ~~strikethrough~~ and
+[links](https://nextjs.org) all work as normal Markdown.
+
+> Blockquotes look like this. Useful for pulling out a line from something you're
+> responding to.
+
+## Lists
+
+1. Ordered lists
+2. Work as expected
+   - And nest
+   - Like this
+
+- [ ] Task lists work too
+- [x] Because remark-gfm is enabled
+
+## Code
+
+Fenced blocks get syntax highlighting in both light and dark mode:
+
+```ts title="lib/posts.ts"
+export function getAllPosts(): Post[] {
+  return fs
+    .readdirSync(POSTS_DIR)
+    .filter((f) => /\.mdx?$/.test(f))
+    .map(readPost)
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+```
+
+Add `title="..."` after the language for the filename header. Use
+`{2-4}` after the language to highlight specific lines.
+
+## Tables
+
+| Frontmatter | Required | What it does                        |
+| ----------- | -------- | ----------------------------------- |
+| `title`     | yes      | Post heading, tab title, OG title   |
+| `date`      | yes      | Sort order and the displayed date    |
+| `description` | no     | Card blurb and meta description     |
+| `tags`      | no       | Powers the filter chips on /blog    |
+| `published` | no       | `false` keeps it out of production  |
+
+## Callouts
+
+<Callout>
+A neutral aside, for context that would interrupt the paragraph flow.
+</Callout>
+
+<Callout type="warn">
+A warning, for the thing that will bite the reader if they skip it.
+</Callout>
+
+## Images
+
+Put the file in `public/` and reference it from the root:
+
+```md
+![Alt text that actually describes the image](/screenshot.png)
+```
