@@ -32,7 +32,10 @@ export function useCommandPalette() {
   return ctx;
 }
 
-/** First letter of each nav item, the way asrvd assigns h/a/n/l/g/s/d. */
+/**
+ * First letter of each nav item, the way asrvd assigns h/a/n/l/g/s/d. Like
+ * kbar's, these work anywhere on the page while the palette is closed.
+ */
 const shortcutFor: Record<string, string> = {
   "/": "h",
   "/about": "a",
@@ -43,6 +46,13 @@ const shortcutFor: Record<string, string> = {
   "/spotify": "s",
   "/dashboard": "d",
 };
+const hrefForShortcut = Object.fromEntries(Object.entries(shortcutFor).map(([href, key]) => [key, href]));
+
+/** True while the user is typing somewhere a letter key should stay a letter. */
+function isEditable(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) return false;
+  return target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
+}
 
 export function CommandPaletteProvider({
   children,
@@ -145,6 +155,21 @@ export function CommandPaletteProvider({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  // Single-key page shortcuts, the ones shown on the right of each nav row.
+  useEffect(() => {
+    if (isOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.metaKey || e.ctrlKey || e.altKey || e.repeat || e.isComposing) return;
+      if (isEditable(e.target)) return;
+      const href = hrefForShortcut[e.key.toLowerCase()];
+      if (!href) return;
+      e.preventDefault();
+      router.push(href);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, router]);
 
   // Keep the page behind the overlay from scrolling while it is open.
   useEffect(() => {

@@ -24,6 +24,15 @@ export async function lastfm(method: Method, params: Record<string, string> = {}
   return fetch(url, { next: { revalidate } });
 }
 
+/**
+ * Last.fm's JSON is converted from XML, so a list with one entry can come back
+ * as a bare object instead of a one-element array. Normalise before mapping.
+ */
+export function asArray<T>(value: T | T[] | undefined | null): T[] {
+  if (value == null) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
 /** Last.fm returns four sizes; index 3 is the largest. */
 export function largestImage(images: { "#text": string }[] | undefined) {
   return images?.[3]?.["#text"] || images?.at(-1)?.["#text"] || "";

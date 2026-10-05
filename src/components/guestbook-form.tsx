@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 import toast from "react-hot-toast";
 import { createEntry, type ActionResult } from "@/app/guestbook/actions";
@@ -20,23 +20,21 @@ function SubmitButton() {
 
 export function GuestbookForm() {
   const [state, formAction] = useActionState<ActionResult | null, FormData>(createEntry, null);
-  const formRef = useRef<HTMLFormElement>(null);
 
-  // Clear the box on success, surface the reason on failure.
   useEffect(() => {
     if (!state) return;
-    if (state.ok) {
-      formRef.current?.reset();
-      toast.success("Thanks for signing!");
-    } else {
-      toast.error(state.error);
-    }
+    if (state.ok) toast.success("Thanks for signing!");
+    else toast.error(state.error);
   }, [state]);
 
   return (
-    <form ref={formRef} action={formAction} className="flex w-full gap-2">
+    <form action={formAction} className="flex w-full gap-2">
       <input
         name="body"
+        // React resets the form after every action. On success that clears the
+        // box; on failure the action hands the text back and the reset restores
+        // it from here, instead of throwing away what was typed.
+        defaultValue={state && !state.ok ? state.body : ""}
         maxLength={300}
         required
         placeholder="Leave a message..."

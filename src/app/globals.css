@@ -36,20 +36,23 @@
     scrollbar-color: var(--color-zinc-700) transparent;
   }
 
-  /* Anchor links added to headings by rehype-autolink-headings. */
-  .heading-anchor {
-    @apply ml-2 opacity-0 no-underline transition-opacity;
-  }
-  h2:hover > .heading-anchor,
-  h3:hover > .heading-anchor,
-  h4:hover > .heading-anchor {
-    @apply opacity-60;
-  }
-
   /* Offset anchored headings so they don't hide under the top of the viewport. */
   :target {
     scroll-margin-top: 6rem;
   }
+}
+
+/* Anchor links added to headings by rehype-autolink-headings.
+ * Unlayered for the same reason as the code blocks below: inside @layer base,
+ * prose's link underline (utilities layer) beat `no-underline`, so the `#`
+ * showed up underlined on hover. */
+.heading-anchor {
+  @apply ml-2 opacity-0 no-underline transition-opacity;
+}
+h2:hover > .heading-anchor,
+h3:hover > .heading-anchor,
+h4:hover > .heading-anchor {
+  @apply opacity-60;
 }
 
 /* Code blocks.

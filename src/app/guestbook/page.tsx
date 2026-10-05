@@ -5,7 +5,7 @@ import { PageShell } from "@/components/page-shell";
 import { PageHeader, Card } from "@/components/card";
 import { GuestbookForm } from "@/components/guestbook-form";
 import { getSession, authConfigured } from "@/auth";
-import { getEntries, dbReady } from "@/lib/db";
+import { getEntries, dbReady, type Entry } from "@/lib/db";
 import { formatDate } from "@/lib/utils";
 import { pageMetadata } from "@/lib/metadata";
 import { signInWithGitHub, signOutOfGuestbook, removeEntry } from "./actions";
@@ -19,14 +19,27 @@ export const metadata = pageMetadata({
 // Entries change on user action, so render per request rather than at build.
 export const dynamic = "force-dynamic";
 
+/**
+ * A database error shouldn't take the whole page down. The usual cause on a
+ * fresh setup is that db/schema.sql hasn't been run, so the table is missing.
+ */
+async function loadEntries(): Promise<{ entries: Entry[]; failed: boolean }> {
+  try {
+    return { entries: await getEntries(), failed: false };
+  } catch (error) {
+    console.error("Failed to load guestbook entries:", error);
+    return { entries: [], failed: true };
+  }
+}
+
 export default async function GuestbookPage() {
-  const [session, entries] = await Promise.all([getSession(), getEntries()]);
+  const [session, { entries, failed }] = await Promise.all([getSession(), loadEntries()]);
   // Both halves have to be wired up before anyone can sign anything.
   const configured = dbReady() && authConfigured();
   const missing = [!dbReady() && "DATABASE_URL", !authConfigured() && "AUTH_SECRET / GitHub OAuth"]
     .filter(Boolean)
     .join(" and ");
-  const myId = session?.user?.githubId ?? session?.user?.email ?? null;
+  const myId = session?.user?.githubId ?? null;
 
   return (
     <PageShell>
@@ -75,8 +88,15 @@ export default async function GuestbookPage() {
       </Card>
 
       <div className="flex flex-col gap-3">
-        {entries.length === 0 && configured && (
-          <p className="m-0 text-sm text-zinc-500">No messages yet. Be the first.</p>
+        {failed ? (
+          <p className="m-0 text-sm text-zinc-500">
+            Couldn&apos;t load messages right now.
+            {process.env.NODE_ENV === "development" &&
+              " Check DATABASE_URL, and that db/schema.sql has been run against it."}
+          </p>
+        ) : (
+          entries.length === 0 &&
+          configured && <p className="m-0 text-sm text-zinc-500">No messages yet. Be the first.</p>
         )}
 
         {entries.map((entry) => (
@@ -99,7 +119,7 @@ export default async function GuestbookPage() {
               <p className="m-0 mt-1 flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-500">
                 <span>{entry.author_name}</span>
                 <span aria-hidden>&middot;</span>
-                <time dateTime={entry.created_at}>{formatDate(entry.created_at)}</time>
+                <time dateTime={entry.created_at.toISOString()}>{formatDate(entry.created_at)}</time>
 
                 {myId && myId === entry.author_id && (
                   <form action={removeEntry}>

@@ -87,7 +87,7 @@ to `.env.local` and fill in as you go.
 
 | What                     | Needs                                                              |
 | ------------------------ | ------------------------------------------------------------------ |
-| GitHub stats, top repos  | Nothing. Already working.                                           |
+| GitHub stats, top repos  | Nothing locally. Add `GITHUB_TOKEN` (no permissions needed) before deploying — Vercel's shared IPs exhaust GitHub's anonymous rate limit. |
 | `/spotify`, scrobbles    | `LASTFM_API_KEY` + `site.lastfm`. Connect Spotify to Last.fm so plays scrobble. |
 | Discord presence         | `site.discordId`, and join [discord.gg/lanyard](https://discord.gg/lanyard) so their API can see you. No key. |
 | Coding hours             | `WAKATIME_API_KEY` + `site.wakatime`.                               |
@@ -123,6 +123,14 @@ Same design language, different machinery:
   isn't set, which would log a stack trace on every guestbook render.
 - **Brand icons come from `react-icons/si`**, except LinkedIn — Simple Icons
   dropped that mark, so it comes from `react-icons/fa6`.
+- **React resets a form before every action**, whatever the action returns.
+  The guestbook hands the submitted text back on failure and restores it via
+  `defaultValue`; drop that and a rejected message gets wiped.
+- **Neon returns `timestamptz` as a `Date`**, not a string — call
+  `.toISOString()` before putting it in an attribute.
+- **Guestbook entries are keyed on the GitHub account id only.** There is
+  deliberately no fallback id; a shared one would let users delete each
+  other's messages.
 
 ## Deploy
 

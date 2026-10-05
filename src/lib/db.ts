@@ -23,7 +23,8 @@ export type Entry = {
   author_name: string;
   author_image: string | null;
   author_id: string;
-  created_at: string;
+  /** The Neon driver parses timestamptz into a Date, not an ISO string. */
+  created_at: Date;
 };
 
 export async function getEntries(limit = 100): Promise<Entry[]> {

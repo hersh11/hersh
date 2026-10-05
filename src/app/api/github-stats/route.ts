@@ -1,16 +1,14 @@
 import { site } from "@/lib/site";
+import { githubFetch } from "@/lib/github";
 import { cached, upstreamFailed } from "@/lib/widget";
 
 type User = { public_repos: number; followers: number };
 type Repository = { stargazers_count: number; fork: boolean };
 
-/** Unauthenticated GitHub API: 60 req/hour per IP, plenty behind the cache. */
 export async function GET() {
   const [me, repos] = await Promise.all([
-    fetch(`https://api.github.com/users/${site.github}`, { next: { revalidate: 3600 } }),
-    fetch(`https://api.github.com/users/${site.github}/repos?per_page=100`, {
-      next: { revalidate: 3600 },
-    }),
+    githubFetch(`/users/${site.github}`, 3600),
+    githubFetch(`/users/${site.github}/repos?per_page=100`, 3600),
   ]);
 
   if (!me.ok) return upstreamFailed("GitHub", me.status);

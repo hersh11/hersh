@@ -27,7 +27,8 @@ const components = {
         </Link>
       );
     }
-    if (href.startsWith("#")) {
+    // Mail and phone links hand off to an app; a new tab would just sit blank.
+    if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) {
       return (
         <a href={href} {...props}>
           {children}
@@ -44,16 +45,22 @@ const components = {
   // Images in posts: put the file in /public and reference it as /my-image.png
   // width/height are dropped because Markdown types them as strings, which
   // next/image rejects; the fixed pair below plus h-auto keeps the ratio.
-  img: ({ src, alt, width: _w, height: _h, ...props }: React.ComponentProps<"img">) => (
-    <Image
-      src={typeof src === "string" ? src : ""}
-      alt={alt ?? ""}
-      width={1200}
-      height={630}
-      className="h-auto w-full rounded-lg"
-      {...props}
-    />
-  ),
+  // Remote URLs skip the optimizer: next/image refuses any host not listed in
+  // next.config.ts, which would fail the whole build over one pasted link.
+  img: ({ src, alt, width: _w, height: _h, ...props }: React.ComponentProps<"img">) => {
+    const url = typeof src === "string" ? src : "";
+    return (
+      <Image
+        src={url}
+        alt={alt ?? ""}
+        width={1200}
+        height={630}
+        unoptimized={!url.startsWith("/")}
+        className="h-auto w-full rounded-lg"
+        {...props}
+      />
+    );
+  },
 
   /** <Callout>...</Callout> — usable directly inside any .mdx post. */
   Callout: ({ children, type = "note" }: { children: React.ReactNode; type?: "note" | "warn" }) => (

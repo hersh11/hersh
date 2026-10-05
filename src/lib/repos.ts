@@ -1,5 +1,6 @@
 import { site } from "./site";
 import type { Repo } from "./types";
+import { githubFetch } from "./github";
 
 /**
  * asrvd shows GitHub's "pinned" repos, which are only exposed through the
@@ -11,10 +12,7 @@ import type { Repo } from "./types";
 const featured: string[] = [];
 
 export async function getTopRepos(limit = 3): Promise<Repo[]> {
-  const res = await fetch(
-    `https://api.github.com/users/${site.github}/repos?per_page=100&sort=updated`,
-    { next: { revalidate: 43200 } },
-  );
+  const res = await githubFetch(`/users/${site.github}/repos?per_page=100&sort=updated`, 43200);
   if (!res.ok) return [];
 
   type ApiRepo = {
@@ -28,7 +26,8 @@ export async function getTopRepos(limit = 3): Promise<Repo[]> {
   };
 
   const all = ((await res.json()) as ApiRepo[])
-    .filter((r) => !r.fork && !r.archived)
+    // A repo named after the account is GitHub's profile README, not a project.
+    .filter((r) => !r.fork && !r.archived && r.name.toLowerCase() !== site.github.toLowerCase())
     .map((r) => ({
       name: r.name,
       description: r.description ?? "",

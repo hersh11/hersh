@@ -13,9 +13,9 @@ export default function HomePage() {
     <PageShell>
       <section className="mb-20 flex w-full flex-col-reverse items-start justify-between gap-4 md:flex-row md:gap-8 lg:gap-14">
         <div className="leading-none">
-          <h2 className="m-0 text-[2.5rem] font-extrabold text-zinc-900 dark:text-zinc-200">
+          <h1 className="m-0 text-[2.5rem] font-extrabold text-zinc-900 dark:text-zinc-200">
             {site.name}
-          </h2>
+          </h1>
           <p className="m-0 mb-4 text-zinc-800 dark:text-zinc-300">{site.role}</p>
           <p className="m-0 text-sm text-zinc-700 dark:text-zinc-400">{site.bio}</p>
         </div>
@@ -25,7 +25,7 @@ export default function HomePage() {
           alt=""
           width={128}
           height={128}
-          priority
+          preload
           className="m-0 h-32 w-32 min-w-32 rounded-full shadow-xl grayscale"
         />
       </section>

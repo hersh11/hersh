@@ -27,17 +27,32 @@ function readPost(fileName: string): Post {
   if (!data.title) throw new Error(`Post "${fileName}" is missing a \`title\` in its frontmatter.`);
   if (!data.date) throw new Error(`Post "${fileName}" is missing a \`date\` in its frontmatter.`);
 
+  const date = new Date(data.date);
+  if (Number.isNaN(date.getTime())) {
+    throw new Error(`Post "${fileName}" has an invalid \`date\` (${data.date}). Use YYYY-MM-DD.`);
+  }
+
   return {
     slug,
     title: data.title,
     description: data.description ?? "",
-    date: new Date(data.date).toISOString().slice(0, 10),
-    tags: data.tags ?? [],
+    date: date.toISOString().slice(0, 10),
+    tags: normaliseTags(data.tags),
     // Drafts are visible in `next dev` so you can preview them, hidden in prod.
     published: data.published ?? true,
     readingTime: readingTime(content).text,
     content,
   };
+}
+
+/**
+ * `tags: typescript` (no brackets) is valid YAML for a plain string, which would
+ * otherwise be iterated character by character. Accept it as a single tag.
+ */
+function normaliseTags(tags: unknown): string[] {
+  if (tags == null) return [];
+  const list = Array.isArray(tags) ? tags : [tags];
+  return list.map((t) => String(t).trim()).filter(Boolean);
 }
 
 export function getAllPosts(): Post[] {
