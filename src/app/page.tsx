@@ -4,11 +4,11 @@ import { PageShell } from "@/components/page-shell";
 import { Section, CardGrid } from "@/components/section";
 import { PostCard } from "@/components/post-card";
 import { TopRepos } from "@/components/top-repos";
-import { getAllPosts } from "@/lib/posts";
+import { getBlogPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
-export default function HomePage() {
-  const recent = getAllPosts().slice(0, 3);
+export default async function HomePage() {
+  const recent = (await getBlogPosts()).slice(0, 3);
 
   return (
     <PageShell>
@@ -53,7 +53,7 @@ export default function HomePage() {
         <Section title="Recent Blogs" id="blogs" moreHref="/blog" moreLabel="Read More">
           <CardGrid>
             {recent.map((post) => (
-              <PostCard key={post.slug} post={post} />
+              <PostCard key={post.href} post={post} />
             ))}
           </CardGrid>
         </Section>

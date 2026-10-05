@@ -27,6 +27,14 @@ export const site = {
 
   // ---- accounts the site reads from ---------------------------------------
   github: "hersh11",
+  /**
+   * Numeric GitHub account id (api.github.com/users/<github> → `id`). Signing
+   * into the guestbook with this account lets you delete anyone's message.
+   * The id, unlike the username, can't be renamed and reused by someone else.
+   */
+  githubId: "72140506",
+  /** Medium username, without the @. Its stories are listed on / and /blog. */
+  medium: "hershh",
   /** Last.fm username. Powers /spotify and the scrobble count. */
   lastfm: "okharsh",
   /** Discord user ID (18-19 digits). Needs membership of discord.gg/lanyard. */

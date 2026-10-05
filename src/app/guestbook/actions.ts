@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { getSession, signIn, signOut } from "@/auth";
-import { addEntry, deleteEntry, dbReady } from "@/lib/db";
+import { addEntry, deleteEntry, deleteEntryAsOwner, dbReady } from "@/lib/db";
+import { site } from "@/lib/site";
 
 const MAX_LENGTH = 300;
 
@@ -61,9 +62,12 @@ export async function removeEntry(formData: FormData): Promise<void> {
   const id = Number(formData.get("id"));
   if (!Number.isInteger(id)) return;
 
-  // The delete is scoped by author id in SQL, so this cannot remove another
-  // person's entry even if the id is tampered with.
-  await deleteEntry(id, authorId);
+  // The site owner can remove anything, which is the only way spam comes down.
+  // Everyone else's delete is scoped by author id in SQL, so it cannot remove
+  // another person's entry even if the id is tampered with. The owner check is
+  // against the GitHub id in the signed session, not anything in the form.
+  if (authorId === site.githubId) await deleteEntryAsOwner(id);
+  else await deleteEntry(id, authorId);
 
   revalidatePath("/guestbook");
 }

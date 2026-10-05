@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { PostMeta } from "@/lib/posts";
+import type { BlogPost } from "@/lib/blog";
 import { PostCard } from "./post-card";
 import { cn } from "@/lib/utils";
 
-export function PostList({ posts, tags }: { posts: PostMeta[]; tags: { tag: string; count: number }[] }) {
+export function PostList({ posts, tags }: { posts: BlogPost[]; tags: { tag: string; count: number }[] }) {
   const [query, setQuery] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
@@ -49,7 +49,7 @@ export function PostList({ posts, tags }: { posts: PostMeta[]; tags: { tag: stri
       ) : (
         <div className="grid gap-5 sm:grid-cols-2">
           {filtered.map((post) => (
-            <PostCard key={post.slug} post={post} />
+            <PostCard key={post.href} post={post} />
           ))}
         </div>
       )}

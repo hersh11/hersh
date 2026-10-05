@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { SiGithub, SiDiscord, SiInstagram, SiX, SiLastdotfm } from "react-icons/si";
+import { SiGithub, SiDiscord, SiInstagram, SiX, SiLastdotfm, SiMedium } from "react-icons/si";
 // Simple Icons dropped the LinkedIn mark over trademark policy, so it comes
 // from Font Awesome instead. Everything else is a Simple Icons brand mark.
 import { FaLinkedinIn } from "react-icons/fa6";
@@ -24,6 +24,12 @@ const all: Link[] = [
   { name: "Resume", url: site.resume, value: "PDF on Google Drive", icon: FiFileText },
   { name: "GitHub", url: `https://github.com/${site.github}`, value: `@${site.github}`, icon: SiGithub },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/hershhh", value: "hershhh", icon: FaLinkedinIn },
+  {
+    name: "Medium",
+    url: site.medium ? `https://medium.com/@${site.medium}` : "",
+    value: `@${site.medium}`,
+    icon: SiMedium,
+  },
   { name: "X", url: "https://x.com/hersheheh", value: "@hersheheh", icon: SiX },
   { name: "Instagram", url: "https://www.instagram.com/hershsus/", value: "@hershsus", icon: SiInstagram },
   {

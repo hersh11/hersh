@@ -24,9 +24,9 @@ npx eslint src  # lint
 | `/about`       | Prose from `content/about.mdx`                                    |
 | `/now`         | What you're up to, from `content/now.mdx`                         |
 | `/links`       | Every profile link, from `src/lib/links.ts`                       |
-| `/blog`        | All posts, live search + tag filter                               |
+| `/blog`        | Medium stories + MDX posts, live search + tag filter              |
 | `/blog/[slug]` | A post: MDX, syntax highlighting, reading time, heading anchors   |
-| `/guestbook`   | GitHub sign-in, leave a message, delete your own                  |
+| `/guestbook`   | GitHub sign-in, leave a message, delete your own (owner: any)     |
 | `/spotify`     | Now playing, top artists, top tracks — via Last.fm                |
 | `/dashboard`   | Discord presence, live age counter, GitHub / Last.fm / Wakatime   |
 
@@ -34,7 +34,12 @@ Plus `/feed.xml`, `/sitemap.xml` and `/robots.txt`, all generated from your post
 
 ## Write a post
 
-Create `content/posts/my-post.mdx`:
+**On Medium** (the default): just publish. Set `site.medium` to your username and
+the site reads your feed hourly, listing new stories on `/` and `/blog` with
+cards that open on Medium. Medium's feed carries your 10 most recent stories.
+
+**On the site itself**, for anything you'd rather host here, create
+`content/posts/my-post.mdx`:
 
 ```mdx
 ---
@@ -93,7 +98,8 @@ to `.env.local` and fill in as you go.
 | `/spotify`, scrobbles    | `LASTFM_API_KEY` + `site.lastfm`. Connect Spotify to Last.fm so plays scrobble. |
 | Discord presence         | `site.discordId`, and join [discord.gg/lanyard](https://discord.gg/lanyard) so their API can see you. No key. |
 | Coding hours             | `WAKATIME_API_KEY` + `site.wakatime`.                               |
-| Guestbook                | `DATABASE_URL` (Neon), `AUTH_SECRET`, `AUTH_GITHUB_ID/SECRET`, and run `db/schema.sql` once. |
+| Medium stories           | `site.medium`. No key — the RSS feed is public.                     |
+| Guestbook                | `DATABASE_URL` (Neon), `AUTH_SECRET`, `AUTH_GITHUB_ID/SECRET`, and run `db/schema.sql` once. `site.githubId` is the owner, who can delete any message. |
 
 ## What changed from asrvd.me
 

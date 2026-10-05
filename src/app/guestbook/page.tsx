@@ -7,6 +7,7 @@ import { GuestbookForm } from "@/components/guestbook-form";
 import { getSession, authConfigured } from "@/auth";
 import { getEntries, dbReady, type Entry } from "@/lib/db";
 import { formatDate } from "@/lib/utils";
+import { site } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 import { signInWithGitHub, signOutOfGuestbook, removeEntry } from "./actions";
 
@@ -40,6 +41,7 @@ export default async function GuestbookPage() {
     .filter(Boolean)
     .join(" and ");
   const myId = session?.user?.githubId ?? null;
+  const isOwner = myId !== null && myId === site.githubId;
 
   return (
     <PageShell>
@@ -121,12 +123,12 @@ export default async function GuestbookPage() {
                 <span aria-hidden>&middot;</span>
                 <time dateTime={entry.created_at.toISOString()}>{formatDate(entry.created_at)}</time>
 
-                {myId && myId === entry.author_id && (
+                {(isOwner || (myId && myId === entry.author_id)) && (
                   <form action={removeEntry}>
                     <input type="hidden" name="id" value={entry.id} />
                     <button
                       type="submit"
-                      aria-label="Delete your message"
+                      aria-label={myId === entry.author_id ? "Delete your message" : "Delete this message"}
                       className="flex items-center hover:text-red-600 dark:hover:text-red-400"
                     >
                       <FiTrash2 size="0.8rem" aria-hidden />

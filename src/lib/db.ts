@@ -56,3 +56,9 @@ export async function deleteEntry(id: number, authorId: string) {
   const sql = db();
   await sql`delete from guestbook where id = ${id} and author_id = ${authorId}`;
 }
+
+/** Moderation: no author scope. Only call after checking the site owner. */
+export async function deleteEntryAsOwner(id: number) {
+  const sql = db();
+  await sql`delete from guestbook where id = ${id}`;
+}
