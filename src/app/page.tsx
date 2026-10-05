@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FiArrowUpRight, FiFileText } from "react-icons/fi";
 import { PageShell } from "@/components/page-shell";
 import { Section, CardGrid } from "@/components/section";
 import { PostCard } from "@/components/post-card";
@@ -18,6 +19,22 @@ export default function HomePage() {
           </h1>
           <p className="m-0 mb-4 text-zinc-800 dark:text-zinc-300">{site.role}</p>
           <p className="m-0 text-sm text-zinc-700 dark:text-zinc-400">{site.bio}</p>
+
+          {site.resume && (
+            <a
+              href={site.resume}
+              target="_blank"
+              rel="noreferrer"
+              className="group mt-6 flex w-fit items-center gap-2 rounded-lg bg-zinc-800 px-4 py-2 text-sm text-zinc-100 no-underline shadow transition duration-300 hover:shadow-xl dark:bg-zinc-200 dark:text-zinc-900"
+            >
+              <FiFileText aria-hidden />
+              Resume
+              <FiArrowUpRight
+                className="duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                aria-hidden
+              />
+            </a>
+          )}
         </div>
 
         <Image

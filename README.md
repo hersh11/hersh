@@ -76,8 +76,10 @@ Then:
   the `featured` array to pick and order them by hand instead.
 - `public/avatar.jpg` — your own avatar; point `site.avatar` at `/avatar.jpg`.
 
-Update `site.url` before deploying — it's `https://example.com` right now, which
-would put the wrong domain in your sitemap, RSS feed and OG tags.
+`site.url` (sitemap, RSS feed, OG tags) comes from Vercel's
+`VERCEL_PROJECT_PRODUCTION_URL`: the `.vercel.app` domain until you add your own,
+then your own. Nothing to edit when you buy a domain — just redeploy after adding
+it so the build picks it up. Locally it's `http://localhost:3000`.
 
 ## Connecting accounts
 
@@ -134,6 +136,7 @@ Same design language, different machinery:
 
 ## Deploy
 
-Vercel: import the repo, add the env vars from `.env.example`, done. Add the
-custom domain once you buy it, update `site.url`, and add the production callback
-URL to your GitHub OAuth app.
+Vercel: import the repo, add the env vars from `.env.example`, done. When you buy
+a domain, add it under Project → Settings → Domains and redeploy; `site.url`
+follows automatically. For the guestbook, also add the production callback URL to
+your GitHub OAuth app.

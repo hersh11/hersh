@@ -1,28 +1,63 @@
-{/* TODO: rewrite this in your own voice. It is the page people read first. */}
-
 # About
 
-Hi, I'm Harsh — a student and developer from India.
+I'm Harsh. I'm in my final year of a B.Tech in computer science, with a minor
+in AI/ML, at Sharda University, Greater Noida, finishing in June 2027.
 
-Most of what I build lives on the web. I like TypeScript, small tools that do
-one thing properly, and reading other people's source code, which has taught me
-more than any tutorial.
+## Research
 
-## What I'm doing
+Most of my time goes into two research projects. Both have been submitted to
+conferences, and both taught me more by failing than they would have by working.
 
-I'm working through the fundamentals properly rather than collecting frameworks:
-data structures, how the browser actually works, and why the abstractions I use
-every day exist. Alongside that I ship side projects, because nothing exposes a
-gap in understanding faster than trying to deploy something.
+The first is **RareSight**. It takes a patient's symptoms, written as
+standardised phenotype codes, and tries to rank which of 557 rare diseases they
+might have. I built a graph neural network for it, and the graph network lost
+badly to a much simpler method that just compares symptom lists directly. Rather
+than swap in the thing that won and move on, I spent the rest of the project
+working out why, and ended up proving that a model trained on the same ontology
+it's tested against can't beat that ontology used directly. Along the way I found
+that the benchmark everyone uses quietly rewards models for repeating the
+patient's own words back at them. That turned into the paper's main argument.
 
-## What I write about
+The second asks whether you can tell when your training code is silently wrong.
+I broke the backward pass on purpose in one specific layer, then ran 7,070
+training runs across five datasets to see whether the damage showed up in how
+the model behaved. Past about two layers deep, it doesn't. The network absorbs
+the fault and trains to nearly the same accuracy, which is an unsettling thing to
+learn about code you'd otherwise trust. All of it ran on one RTX 3050, mostly
+overnight.
 
-The things that took me longest to understand. If I had to piece an explanation
-together from six tabs and a Stack Overflow answer from 2016, it probably
-deserves a post.
+## Work
 
-## Elsewhere
+I also spent six weeks interning at Siddhi Sarees, on a team of about a dozen
+people rebuilding their site for international customers. My actual job there
+was small: bug fixes, layout problems, the things interns get handed. But nobody
+could tell where an order was or who was holding it up, so I built them an
+internal dashboard for it in plain JavaScript with no framework. Nobody asked me
+to. It's on GitHub at
+[github.com/hersh11/dashboard-siddhisaree](https://github.com/hersh11/dashboard-siddhisaree).
 
-The fastest way to reach me is [email](mailto:hershhnarain@gmail.com). Code is on
-[GitHub](https://github.com/hersh11), and everything else is on the
-[links](/links) page.
+## Tools
+
+On the practical side, it's mostly Python and JavaScript, PyTorch for anything
+with a model in it, SQL and Java when I need them. I've used SageMaker, S3 and
+EC2 in our AWS lab, written GitHub Actions workflows and poked at Jenkins. My
+Linux is functional rather than good. I've used Docker in coursework but wouldn't
+claim it yet.
+
+## Outside code
+
+Away from all that I play a lot of video games, mostly FPS, I like design, and I
+travel when I get the chance. I volunteer too. Before university I spent a few
+months with TechBridge India Foundation in Bareilly running digital literacy and
+beginner coding workshops for school students. There were no lesson plans, so I
+wrote them. Explaining a for-loop to someone who has never opened a terminal is
+the fastest way I know to find out whether you understand it yourself.
+
+## What's next
+
+I'm looking for a software or ML internship now, and I'm curious about working
+somewhere with a different engineering culture to the one I've trained in.
+
+The quickest way to reach me is [email](mailto:hershhnarain@gmail.com). My
+[resume](https://drive.google.com/file/d/1IeVZTEbaeqKTTVX5u9b_p3pdWd0VNe5G/view)
+is on Google Drive, and everything else is on the [links](/links) page.

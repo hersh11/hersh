@@ -45,7 +45,10 @@ export function Stats() {
   const age = useTickingAge();
   const github = value(useSWR<WidgetResponse<GithubStats>>("/api/github-stats", fetcher).data);
   const scrobbles = value(useSWR<WidgetResponse<Scrobbles>>("/api/scrobbles", fetcher).data);
-  const wakatime = value(useSWR<WidgetResponse<WakatimeStats>>("/api/wakatime", fetcher).data);
+  // A null key tells SWR not to fetch: no username, no card, no request.
+  const wakatime = value(
+    useSWR<WidgetResponse<WakatimeStats>>(site.wakatime ? "/api/wakatime" : null, fetcher).data,
+  );
 
   const cards = [
     { title: "My Age", value: age, link: "/about" },
@@ -61,11 +64,16 @@ export function Stats() {
       value: scrobbles?.playcount?.toLocaleString(),
       link: scrobbles?.url || "https://last.fm",
     },
-    {
-      title: "Coding Hours",
-      value: wakatime ? Math.round(wakatime.total_seconds / 3600).toLocaleString() : undefined,
-      link: site.wakatime ? `https://wakatime.com/@${site.wakatime}` : "https://wakatime.com",
-    },
+    // Only shown once site.wakatime is set; otherwise it would read "-" forever.
+    ...(site.wakatime
+      ? [
+          {
+            title: "Coding Hours",
+            value: wakatime ? Math.round(wakatime.total_seconds / 3600).toLocaleString() : undefined,
+            link: `https://wakatime.com/@${site.wakatime}`,
+          },
+        ]
+      : []),
   ];
 
   return (

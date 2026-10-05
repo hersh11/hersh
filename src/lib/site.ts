@@ -8,22 +8,31 @@ export const site = {
   name: "Harsh",
   /** Used in the browser tab as `harsh // about`. Keep it lowercase and short. */
   handle: "harsh",
-  role: "Student & developer",
-  bio: "Learning about the web and building small things end to end. I like open source and I write about what I figure out along the way.",
-  /** Update once you buy the domain — this feeds OG tags, RSS and the sitemap. */
-  url: "https://example.com",
+  role: "Final-year CSE student",
+  bio: "Studying computer science at Sharda University with a minor in AI/ML. I do ML research (two papers submitted to conferences) and I'm looking for a software or ML internship.",
+  /**
+   * Feeds OG tags, RSS and the sitemap. Vercel sets VERCEL_PROJECT_PRODUCTION_URL
+   * to the project's production domain - the .vercel.app one today, your own
+   * domain once it's added in Vercel - so this needs no edit when you buy one.
+   * Redeploy after adding a domain so the build picks it up.
+   */
+  url: process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000",
   locale: "en_IN",
   /** Drop a square image at public/avatar.jpg and change this to "/avatar.jpg". */
   avatar: "https://github.com/hersh11.png",
+  /** The Resume button on the home page and the Resume row on /links. "" hides both. */
+  resume: "https://drive.google.com/file/d/1IeVZTEbaeqKTTVX5u9b_p3pdWd0VNe5G/view",
 
   // ---- accounts the site reads from ---------------------------------------
   github: "hersh11",
   /** Last.fm username. Powers /spotify and the scrobble count. */
-  lastfm: "", // TODO
-  /** Discord user ID (18-19 digits, from Developer Mode > Copy User ID). */
-  discordId: "", // TODO — also join discord.gg/lanyard so the API can see you
-  /** Wakatime username, for the profile link on the coding-hours card. */
-  wakatime: "", // TODO
+  lastfm: "okharsh",
+  /** Discord user ID (18-19 digits). Needs membership of discord.gg/lanyard. */
+  discordId: "689165036836356157",
+  /** Wakatime username. Leave "" and the Coding Hours card is hidden. */
+  wakatime: "",
 
   /**
    * Feeds the live age counter on /dashboard. Nothing but the computed age is
