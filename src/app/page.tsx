@@ -47,19 +47,17 @@ export default function HomePage() {
         />
       </section>
 
-      <Section title="Recent Blogs" id="blogs" moreHref="/blog" moreLabel="Read More">
-        {recent.length > 0 ? (
+      {/* With no published posts the section is left out entirely rather than
+          showing visitors an empty heading. Drafts still count in `next dev`. */}
+      {recent.length > 0 && (
+        <Section title="Recent Blogs" id="blogs" moreHref="/blog" moreLabel="Read More">
           <CardGrid>
             {recent.map((post) => (
               <PostCard key={post.slug} post={post} />
             ))}
           </CardGrid>
-        ) : (
-          <p className="m-0 text-sm text-zinc-500">
-            No posts yet. Add an .mdx file in content/posts/ to get started.
-          </p>
-        )}
-      </Section>
+        </Section>
+      )}
 
       <Section
         title="Top Projects"

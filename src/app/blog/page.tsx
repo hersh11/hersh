@@ -15,6 +15,14 @@ export default function BlogPage() {
   const posts = getAllPosts().map(({ content: _content, ...meta }) => meta);
   const tags = getAllTags();
 
+  if (posts.length === 0) {
+    return (
+      <PageShell>
+        <PageHeader title="Blog">No posts yet.</PageHeader>
+      </PageShell>
+    );
+  }
+
   return (
     <PageShell>
       <PageHeader title="Blog">
