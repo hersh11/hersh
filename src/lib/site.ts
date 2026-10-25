@@ -47,7 +47,7 @@ export const site = {
    * ever rendered, but this file is public — remove the card in
    * src/components/stats.tsx if you'd rather not have it in the repo at all.
    */
-  birthDate: "2003-08-31T10:00:00+05:30",
+  birthDate: "2004-08-31T10:00:00+05:30",
 
   /** Shown in the footer as "MIT <year>-present ©". */
   since: 2026,
