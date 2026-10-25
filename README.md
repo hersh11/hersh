@@ -77,8 +77,9 @@ Then:
 - `src/lib/links.ts` — the `/links` page. Rows with an empty `url` are hidden, so
   fill in what you use and delete the rest.
 - `content/about.mdx`, `content/now.mdx` — prose for those two pages.
-- `src/lib/repos.ts` — `/` shows your most-starred repos by default. Put slugs in
-  the `featured` array to pick and order them by hand instead.
+- `src/lib/projects.ts` — Top Projects on `/`: name, description, live URL and
+  GitHub repo for each. Cards open the live site, the GitHub icon opens the
+  source, and "View More" goes to your repositories tab.
 - `public/avatar.jpg` — your own avatar; point `site.avatar` at `/avatar.jpg`.
 
 `site.url` (sitemap, RSS feed, OG tags) comes from Vercel's

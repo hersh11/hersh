@@ -3,7 +3,7 @@ import { FiArrowUpRight, FiFileText } from "react-icons/fi";
 import { PageShell } from "@/components/page-shell";
 import { Section, CardGrid } from "@/components/section";
 import { PostCard } from "@/components/post-card";
-import { TopRepos } from "@/components/top-repos";
+import { Projects } from "@/components/projects";
 import { getBlogPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
@@ -67,7 +67,7 @@ export default async function HomePage() {
         external
         last
       >
-        <TopRepos />
+        <Projects />
       </Section>
     </PageShell>
   );

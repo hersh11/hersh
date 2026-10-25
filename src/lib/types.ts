@@ -11,14 +11,6 @@ export type TopTrack = { name: string; playcount: string; url: string; artist: s
 
 export type GithubStats = { stars: number; repos: number; followers: number };
 
-export type Repo = {
-  name: string;
-  description: string;
-  url: string;
-  stars: number;
-  forks: number;
-};
-
 export type LanyardUser = {
   username: string;
   displayName: string;
