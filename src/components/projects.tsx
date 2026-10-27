@@ -29,9 +29,9 @@ export async function Projects() {
                   {project.name}
                 </a>
               </h3>
-              <p className="m-0 mb-5 flex items-center gap-0.5 text-xs text-zinc-600 dark:text-zinc-400">
-                {new URL(project.url).hostname}
-                <FiArrowUpRight aria-hidden />
+              <p className="m-0 mb-5 flex min-w-0 items-center gap-0.5 text-xs text-zinc-600 dark:text-zinc-400">
+                <span className="truncate">{new URL(project.url).hostname}</span>
+                <FiArrowUpRight aria-hidden className="shrink-0" />
               </p>
               <p className="m-0 mb-6 w-full text-sm tracking-tight text-zinc-700 dark:text-zinc-300">
                 {project.description}

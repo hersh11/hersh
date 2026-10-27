@@ -21,7 +21,7 @@ export type Link = {
  * Anything with an empty `url` is filtered out.
  */
 const all: Link[] = [
-  { name: "Resume", url: site.resume, value: "PDF on Google Drive", icon: FiFileText },
+  { name: "Resume", url: site.resume, value: "PDF", icon: FiFileText },
   { name: "GitHub", url: `https://github.com/${site.github}`, value: `@${site.github}`, icon: SiGithub },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/hershhh", value: "hershhh", icon: FaLinkedinIn },
   {

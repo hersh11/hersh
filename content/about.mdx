@@ -1,63 +1,74 @@
 # About
 
-I'm Harsh. I'm in my final year of a B.Tech in computer science, with a minor
-in AI/ML, at Sharda University, Greater Noida, finishing in June 2027.
+I'm Harsh, a CS senior in Noida. I'm doing a B.Tech in Computer Science with a
+specialization in AI and ML at Sharda University, and I graduate in June 2027.
+
+## What I build
+
+Most of my projects start because something annoyed me.
+
+When I started learning Japanese, every site I tried drew the characters a
+little differently, with dots on one and strokes on another for kana like shi
+and tsu. That's fine if you already know the language. It wasn't fine for me. So I made
+[Nihongo Path](https://nihongo.harshnarain.me), the course I wanted: kana up to
+JLPT N4, with pronunciation written in Devanagari instead of romaji, and a
+review system that brings words back just before you'd forget them. I revise
+on it every day.
+
+This summer I interned at Siddhi Sarees, on a team rebuilding their website. My
+actual job was small fixes. But orders moved through WhatsApp chats, phone
+calls and sticky notes, and the only people who could tell where an order
+stood were the ones making the bills at the front desk. I felt overwhelmed
+just imagining being in their place, so I built an
+[order dashboard](https://siddhi.harshnarain.me) that nobody had asked for.
+Looking back, it's a prototype: no login, no database, no way to edit an order
+from the dashboard itself. The timeline and the metrics were the useful
+part.
+
+There's also [Budget Buddy](https://budget.harshnarain.me), which shows me
+where my money actually went, and
+[ShareTheMeal](https://sharethemeal.harshnarain.me), a small app for posting
+leftover food for NGOs nearby.
+
+## How I work now
+
+I used to build things until they worked and stop there. Now I check load
+times and image sizes, use SVGs wherever I can, and write comments and commits
+that a new person can follow. I picked that up during the internship, reading
+old code that someone had commented properly long before AI tools were around.
+
+I'd rather read the documentation than follow a tutorial made for everyone.
 
 ## Research
 
-Most of my time goes into two research projects. Both have been submitted to
-conferences, and both taught me more by failing than they would have by working.
+I also do a bit of ML research. One project looks at bugs in training code
+that leave accuracy looking normal. The other checks how much a popular
+rare-disease benchmark overlaps with the answers it's graded against. The
+first one ran mostly overnight on my laptop's RTX 3050.
 
-The first is **RareSight**. It takes a patient's symptoms, written as
-standardised phenotype codes, and tries to rank which of 557 rare diseases they
-might have. I built a graph neural network for it, and the graph network lost
-badly to a much simpler method that just compares symptom lists directly. Rather
-than swap in the thing that won and move on, I spent the rest of the project
-working out why, and ended up proving that a model trained on the same ontology
-it's tested against can't beat that ontology used directly. Along the way I found
-that the benchmark everyone uses quietly rewards models for repeating the
-patient's own words back at them. That turned into the paper's main argument.
+## Away from the keyboard
 
-The second asks whether you can tell when your training code is silently wrong.
-I broke the backward pass on purpose in one specific layer, then ran 7,070
-training runs across five datasets to see whether the damage showed up in how
-the model behaved. Past about two layers deep, it doesn't. The network absorbs
-the fault and trains to nearly the same accuracy, which is an unsettling thing to
-learn about code you'd otherwise trust. All of it ran on one RTX 3050, mostly
-overnight.
+Games, mostly shooters: Valorant, Counter-Strike, Overwatch, Marvel Rivals, The
+Finals and Apex Legends. I'm top 1% in the ones I take seriously. osu! when I
+want a different kind of pain, and anime the rest of the time. Right now I'm
+building a tracker.gg-style page that puts all my gaming profiles and stats in
+one place.
 
-## Work
+Music is pretty much any pop, but dream pop, bedroom pop and synth pop most of
+all, with some R&B, K-pop and the odd indie or country song. Lately it's been
+The Marías, Not for Radio, Madison Beer, ROSÉ, Nessa Barrett and a bit of
+Chase Atlantic. The [Spotify page](/spotify) shows what's actually playing.
 
-I also spent six weeks interning at Siddhi Sarees, on a team of about a dozen
-people rebuilding their site for international customers. My actual job there
-was small: bug fixes, layout problems, the things interns get handed. But nobody
-could tell where an order was or who was holding it up, so I built them an
-internal dashboard for it in plain JavaScript with no framework. Nobody asked me
-to. It's on GitHub at
-[github.com/hersh11/dashboard-siddhisaree](https://github.com/hersh11/dashboard-siddhisaree).
+Japanese is going slowly. I can read it and follow most of what I hear, but my
+writing is still messy and I can't keep a conversation going without stopping
+every few words. I'd love to work in Japan someday, so I'm sticking with it.
 
-## Tools
+In my first semester I spent weekends running beginner coding workshops for
+school students with TechBridge India Foundation. There were no lesson plans,
+so I wrote them.
 
-On the practical side, it's mostly Python and JavaScript, PyTorch for anything
-with a model in it, SQL and Java when I need them. I've used SageMaker, S3 and
-EC2 in our AWS lab, written GitHub Actions workflows and poked at Jenkins. My
-Linux is functional rather than good. I've used Docker in coursework but wouldn't
-claim it yet.
+## Say hi
 
-## Outside code
-
-Away from all that I play a lot of video games, mostly FPS, I like design, and I
-travel when I get the chance. I volunteer too. Before university I spent a few
-months with TechBridge India Foundation in Bareilly running digital literacy and
-beginner coding workshops for school students. There were no lesson plans, so I
-wrote them. Explaining a for-loop to someone who has never opened a terminal is
-the fastest way I know to find out whether you understand it yourself.
-
-## What's next
-
-I'm looking for a software or ML internship now, and I'm curious about working
-somewhere with a different engineering culture to the one I've trained in.
-
-The quickest way to reach me is [email](mailto:hershhnarain@gmail.com). My
-[resume](https://drive.google.com/file/d/1IeVZTEbaeqKTTVX5u9b_p3pdWd0VNe5G/view)
-is on Google Drive, and everything else is on the [links](/links) page.
+Email is quickest: [hershhnarain@gmail.com](mailto:hershhnarain@gmail.com).
+Everything else is on the [links](/links) page, and my resume is
+[here](/Harsh_Narain_Resume.pdf) if you want the formal version.

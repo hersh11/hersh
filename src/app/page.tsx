@@ -50,7 +50,7 @@ export default async function HomePage() {
       {/* With no published posts the section is left out entirely rather than
           showing visitors an empty heading. Drafts still count in `next dev`. */}
       {recent.length > 0 && (
-        <Section title="Recent Blogs" id="blogs" moreHref="/blog" moreLabel="Read More">
+        <Section title="Recent posts" id="blogs" moreHref="/blog" moreLabel="All posts">
           <CardGrid>
             {recent.map((post) => (
               <PostCard key={post.href} post={post} />
@@ -60,10 +60,10 @@ export default async function HomePage() {
       )}
 
       <Section
-        title="Top Projects"
+        title="Things I've made"
         id="projects"
         moreHref={`https://github.com/${site.github}?tab=repositories`}
-        moreLabel="View More"
+        moreLabel="More on GitHub"
         external
         last
       >

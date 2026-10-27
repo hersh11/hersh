@@ -8,8 +8,8 @@ export const site = {
   name: "Harsh",
   /** Used in the browser tab as `harsh // about`. Keep it lowercase and short. */
   handle: "harsh",
-  role: "Final-year CSE student",
-  bio: "Studying computer science at Sharda University with a minor in AI/ML. I do ML research (two papers submitted to conferences) and I'm looking for a software or ML internship.",
+  role: "Web dev and AI/ML",
+  bio: "I'm a CS senior in Noida. I build small web apps, usually because something annoyed me, and I'm learning Japanese on a course I made for myself.",
   /**
    * Feeds OG tags, RSS and the sitemap. Vercel sets VERCEL_PROJECT_PRODUCTION_URL
    * to the project's production domain - the .vercel.app one today, your own
@@ -23,7 +23,7 @@ export const site = {
   /** Drop a square image at public/avatar.jpg and change this to "/avatar.jpg". */
   avatar: "https://github.com/hersh11.png",
   /** The Resume button on the home page and the Resume row on /links. "" hides both. */
-  resume: "https://drive.google.com/file/d/1IeVZTEbaeqKTTVX5u9b_p3pdWd0VNe5G/view",
+  resume: "/Harsh_Narain_Resume.pdf",
 
   // ---- accounts the site reads from ---------------------------------------
   github: "hersh11",
