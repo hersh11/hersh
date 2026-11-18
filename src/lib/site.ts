@@ -9,7 +9,7 @@ export const site = {
   /** Used in the browser tab as `harsh // about`. Keep it lowercase and short. */
   handle: "harsh",
   role: "Web dev and AI/ML",
-  bio: "I'm a CS senior in Noida. I build small web apps, usually because something annoyed me, and I'm learning Japanese on a course I made for myself.",
+  bio: "I'm a final-year CSE student from India. I build small web apps, usually after something annoys me enough; the Japanese course I revise on every day started that way.",
   /**
    * Feeds OG tags, RSS and the sitemap. Vercel sets VERCEL_PROJECT_PRODUCTION_URL
    * to the project's production domain - the .vercel.app one today, your own

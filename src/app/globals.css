@@ -23,8 +23,17 @@
     font-family: var(--font-sans);
   }
 
+  /* A soft highlight in the opposite tone, so selected text reads in both
+     themes. Plain CSS on purpose: `@apply dark:...` here compiled to
+     `::selection:where()`, which never matches, so light mode ended up with
+     near-white text on a near-white highlight. */
   ::selection {
-    @apply bg-zinc-800 text-zinc-100 dark:bg-zinc-200 dark:text-zinc-900;
+    background-color: color-mix(in oklab, var(--color-zinc-800) 30%, transparent);
+    color: var(--color-zinc-900);
+  }
+  .dark ::selection {
+    background-color: color-mix(in oklab, var(--color-zinc-200) 30%, transparent);
+    color: var(--color-zinc-100);
   }
 
   /* Slim scrollbars, matching the zinc palette. */

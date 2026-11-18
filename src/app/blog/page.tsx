@@ -7,8 +7,7 @@ import { site } from "@/lib/site";
 
 export const metadata = pageMetadata({
   path: "blog",
-  description: "Posts on what I am building and learning.",
-  emoji: "📝",
+  description: "What I'm building and learning, written down.",
 });
 
 const mediumProfile = site.medium ? `https://medium.com/@${site.medium}` : null;
@@ -34,11 +33,11 @@ export default async function BlogPage() {
     return (
       <PageShell>
         <PageHeader title="Blog">
-          No posts yet.
+          Nothing here yet.
           {mediumProfile && (
             <>
               {" "}
-              I write on <MediumLink>Medium</MediumLink>, so that&apos;s where the first one will appear.
+              I write on <MediumLink>Medium</MediumLink>, so the first post will turn up there.
             </>
           )}
         </PageHeader>
@@ -49,7 +48,7 @@ export default async function BlogPage() {
   return (
     <PageShell>
       <PageHeader title="Blog">
-        {posts.length} {posts.length === 1 ? "post" : "posts"} on what I am building and learning.
+        {posts.length} {posts.length === 1 ? "post" : "posts"} on what I&apos;m building and learning.
         {mediumProfile && (
           <>
             {" "}

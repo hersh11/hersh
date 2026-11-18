@@ -7,8 +7,7 @@ import { formatDate } from "@/lib/utils";
 
 export const metadata = pageMetadata({
   path: "now",
-  description: "The answer to what I'm up to.",
-  emoji: "✨",
+  description: "What I'm doing at the moment, kept roughly up to date.",
 });
 
 export default function NowPage() {

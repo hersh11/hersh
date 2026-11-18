@@ -57,7 +57,7 @@ export function TopArtists() {
   if (isUnconfigured(data)) return <WidgetUnconfigured title="Top artists" reason={data.reason} />;
 
   return (
-    <ListCard title="Top Artists" blurb="according to the last 4 weeks">
+    <ListCard title="Top Artists" blurb="from the last four weeks">
       {data.map((artist, i) => (
         <Row key={artist.url} index={i} title={artist.name} plays={artist.playcount} url={artist.url} />
       ))}
@@ -73,7 +73,7 @@ export function TopTracks() {
   if (isUnconfigured(data)) return <WidgetUnconfigured title="Top tracks" reason={data.reason} />;
 
   return (
-    <ListCard title="Top Tracks" blurb="according to the last 4 weeks">
+    <ListCard title="Top Tracks" blurb="from the last four weeks">
       {data.map((track, i) => (
         <Row
           key={track.url}

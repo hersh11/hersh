@@ -23,7 +23,7 @@ export function GuestbookForm() {
 
   useEffect(() => {
     if (!state) return;
-    if (state.ok) toast.success("Thanks for signing!");
+    if (state.ok) toast.success("Thanks for signing :)");
     else toast.error(state.error);
   }, [state]);
 

@@ -7,13 +7,11 @@ import { Nav } from "@/components/nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { getAllPosts } from "@/lib/posts";
 import { site } from "@/lib/site";
-import { emojiIcon } from "@/lib/metadata";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.handle, template: `${site.handle} // %s` },
   description: site.bio,
-  icons: { icon: emojiIcon("🎐") },
   openGraph: {
     title: site.name,
     description: site.bio,
@@ -37,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <CommandPaletteProvider posts={posts}>
-            <main className="relative flex min-h-screen flex-col items-center overflow-x-hidden bg-zinc-100 selection:bg-zinc-200/30 dark:bg-zinc-900">
+            <main className="relative flex min-h-screen flex-col items-center overflow-x-hidden bg-zinc-100 dark:bg-zinc-900">
               <Nav />
               <MobileNav />
               {/* Same proportions as asrvd.me: a narrow centred column. */}

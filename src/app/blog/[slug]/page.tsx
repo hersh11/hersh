@@ -8,7 +8,6 @@ import { Mdx } from "@/components/mdx";
 import { getAllPosts, getPost } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
 import { site } from "@/lib/site";
-import { emojiIcon } from "@/lib/metadata";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -25,7 +24,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `blog/${post.slug}`,
     description: post.description,
-    icons: { icon: emojiIcon("📝") },
     openGraph: {
       title: post.title,
       description: post.description,

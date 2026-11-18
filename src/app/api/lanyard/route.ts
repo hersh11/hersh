@@ -17,7 +17,7 @@ export async function GET() {
   if (!res.ok) {
     // 404 here almost always means "not in the Lanyard server", not a bad ID.
     return res.status === 404
-      ? unconfigured("Lanyard can't see this user — join discord.gg/lanyard first.")
+      ? unconfigured("Lanyard can't see this user yet: join discord.gg/lanyard first.")
       : upstreamFailed("Lanyard", res.status);
   }
 

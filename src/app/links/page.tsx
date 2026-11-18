@@ -5,18 +5,19 @@ import { links } from "@/lib/links";
 
 export const metadata = pageMetadata({
   path: "links",
-  description: "All of my links in one place.",
-  emoji: "📎",
+  description: "Everywhere you can find me online.",
 });
 
 export default function LinksPage() {
   return (
     <PageShell>
-      <PageHeader title="Links">All my profile links to find me on the web.</PageHeader>
+      <PageHeader title="Links">
+        Everywhere you can find me online, though email is still the quickest.
+      </PageHeader>
 
       {links.length === 0 ? (
         <p className="m-0 text-sm text-zinc-500">
-          No links yet — fill them in at <code>src/lib/links.ts</code>.
+          No links yet: fill them in at <code>src/lib/links.ts</code>.
         </p>
       ) : (
         <Card>

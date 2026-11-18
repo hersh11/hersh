@@ -22,7 +22,7 @@ export default function PageError({
   return (
     <div className="flex min-h-[60vh] w-full flex-col items-center justify-center gap-4 text-center">
       <h1 className="text-[3rem] leading-none font-extrabold text-zinc-900 dark:text-zinc-100">Oops</h1>
-      <p className="text-zinc-600 dark:text-zinc-400">Something went wrong loading this page.</p>
+      <p className="text-zinc-600 dark:text-zinc-400">Something broke while loading this page. That one&apos;s on me.</p>
       <div className="flex gap-3">
         <button
           type="button"

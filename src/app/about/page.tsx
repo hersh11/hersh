@@ -6,8 +6,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   path: "about",
-  description: "Things you (maybe) want to know about me.",
-  emoji: "🍥",
+  description: "What I build and why (it's usually annoyance).",
 });
 
 export default function AboutPage() {

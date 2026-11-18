@@ -6,7 +6,7 @@ import { githubFetch } from "./github";
  * deployed site; a GitHub icon on the card opens the source. Three fills the
  * home page's three-column row exactly.
  *
- * Descriptions are written in Harsh's own voice (Oct 2026), shorter and more
+ * Descriptions are in my own voice (rewritten Nov 2026), shorter and more
  * personal than each site's meta description.
  *
  * Also deployed, not shown: Budget Buddy — https://budget.harshnarain.me,
@@ -16,21 +16,21 @@ export const projects: Project[] = [
   {
     name: "Nihongo Path",
     description:
-      "Japanese from kana to JLPT N4 for Hindi speakers, with pronunciation in Devanagari. I revise on it every day.",
+      "Japanese from kana to JLPT N4 for Hindi speakers, with pronunciation in Devanagari. I built it for myself and still revise on it every day.",
     url: "https://nihongo.harshnarain.me",
     repo: "learnjapanese",
   },
   {
     name: "Siddhi Sarees dashboard",
     description:
-      "Nobody at my internship could tell where an order was, so I built a dashboard that could.",
+      "Nobody at my internship could tell where an order was, so I built a dashboard that could (nobody had asked me to).",
     url: "https://siddhi.harshnarain.me",
     repo: "dashboard-siddhisaree",
   },
   {
     name: "ShareTheMeal",
     description:
-      "Post leftover food for NGOs nearby, pick a pickup time and keep track of it.",
+      "Post leftover food for NGOs nearby and pick a pickup slot. It runs in demo mode, so the NGOs are made up.",
     url: "https://sharethemeal.harshnarain.me",
     repo: "sharethemealapp",
   },

@@ -13,8 +13,7 @@ import { signInWithGitHub, signOutOfGuestbook, removeEntry } from "./actions";
 
 export const metadata = pageMetadata({
   path: "guestbook",
-  description: "Sign my guestbook and leave a message.",
-  emoji: "📖",
+  description: "Sign my guestbook and say hi.",
 });
 
 // Entries change on user action, so render per request rather than at build.
@@ -46,13 +45,13 @@ export default async function GuestbookPage() {
   return (
     <PageShell>
       <PageHeader title="Guestbook">
-        Leave a message, a recommendation, or whatever you like.
+        Say hi, recommend a song or an anime, or leave whatever you like.
       </PageHeader>
 
       <Card className="flex flex-col gap-4">
         {!configured ? (
           <p className="m-0 text-sm text-zinc-700 dark:text-zinc-400">
-            The guestbook isn&apos;t switched on yet — {missing} still needs setting. See{" "}
+            The guestbook isn&apos;t switched on yet: {missing} still needs setting. See{" "}
             <code>.env.example</code> and <code>db/schema.sql</code>.
           </p>
         ) : session?.user ? (
@@ -98,7 +97,7 @@ export default async function GuestbookPage() {
           </p>
         ) : (
           entries.length === 0 &&
-          configured && <p className="m-0 text-sm text-zinc-500">No messages yet. Be the first.</p>
+          configured && <p className="m-0 text-sm text-zinc-500">No messages yet. Somebody has to go first.</p>
         )}
 
         {entries.map((entry) => (

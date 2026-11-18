@@ -6,15 +6,14 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   path: "spotify",
-  description: "All of my Spotify stats in one place.",
-  emoji: "🎶",
+  description: "What I've actually been listening to, pulled from Last.fm.",
 });
 
 export default function SpotifyPage() {
   return (
     <PageShell>
       <PageHeader title="Spotify Stats">
-        What I have been listening to, by way of Last.fm.
+        What I&apos;ve actually been listening to, pulled from Last.fm (so no curating).
       </PageHeader>
 
       <NowPlaying />
